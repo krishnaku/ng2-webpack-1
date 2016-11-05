@@ -5,6 +5,7 @@ var helpers = require('./helpers');
 
 module.exports = {
     entry: {
+        'plotly': ['./src/app/plotly-shim.js'],
         'polyfills': './src/polyfills.ts',
         'vendor': './src/vendor.ts',
         'app': './src/main.ts'
@@ -37,13 +38,17 @@ module.exports = {
                 test: /\.css$/,
                 include: helpers.root('src', 'app'),
                 loader: 'raw'
+            },
+            {
+                test: /node_modules/,
+                loader: 'ify'
             }
         ]
     },
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['app', 'vendor', 'polyfills']
+            name: ['app', 'vendor', 'polyfills', 'plotly']
         }),
 
         new HtmlWebpackPlugin({

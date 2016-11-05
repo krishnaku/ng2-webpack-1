@@ -10,16 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 require('../../public/css/styles.css');
-var AppComponent = (function () {
-    function AppComponent() {
+var Renderer = require('./chart-renderer');
+var ChartDirective = (function () {
+    function ChartDirective(el) {
+        console.log("Constructing Directive");
+        console.log(el.nativeElement);
+        this.root = el.nativeElement;
     }
+    ChartDirective = __decorate([
+        core_1.Directive({ selector: 'chart' }), 
+        __metadata('design:paramtypes', [core_1.ElementRef])
+    ], ChartDirective);
+    return ChartDirective;
+}());
+exports.ChartDirective = ChartDirective;
+var AppComponent = (function () {
+    function AppComponent(el) {
+        this.el = el;
+        console.log("Constructing component");
+        console.log(el.nativeElement);
+    }
+    AppComponent.prototype.ngOnInit = function () {
+        console.log("building chart..");
+    };
+    AppComponent.prototype.ngAfterViewInit = function () {
+        Renderer.basic_chart(this.chart_root.root);
+    };
+    __decorate([
+        core_1.ViewChild(ChartDirective), 
+        __metadata('design:type', ChartDirective)
+    ], AppComponent.prototype, "chart_root", void 0);
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             templateUrl: './app.component.html',
             styleUrls: ['./app.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [core_1.ElementRef])
     ], AppComponent);
     return AppComponent;
 }());

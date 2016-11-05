@@ -6,4 +6,5 @@ if (process.env.ENV === 'production') {
     core_1.enableProdMode();
 }
 platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule);
+console.log("app bootstrapped");
 //# sourceMappingURL=main.js.map

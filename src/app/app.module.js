@@ -11,18 +11,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
+var tableau_component_1 = require("./tableau.component");
+var root_component_1 = require("./root.component");
+var login_routing_module_1 = require("./login-routing.module");
+var app_routing_module_1 = require("./app.routing.module");
+var login_component_1 = require("./login.component");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
-                platform_browser_1.BrowserModule
+                platform_browser_1.BrowserModule,
+                app_routing_module_1.AppRoutingModule,
+                login_routing_module_1.LoginRoutingModule
             ],
             declarations: [
-                app_component_1.AppComponent
+                app_component_1.ChartDirective,
+                app_component_1.AppComponent,
+                tableau_component_1.TableauComponent,
+                login_component_1.LoginComponent,
+                root_component_1.RootComponent
             ],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [root_component_1.RootComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

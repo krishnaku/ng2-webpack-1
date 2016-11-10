@@ -16,12 +16,10 @@ import {TableauComponent} from "./tableau.component";
         children: [
           {
             path: 'tableau',
-            component: TableauComponent,
-            canActivate: [AuthGuard]
+            component: TableauComponent
           },
           {
-            path: '',
-            canActivate: [AuthGuard]
+            path: ''
           }
         ]
       },

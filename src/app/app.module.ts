@@ -3,21 +3,24 @@ import { BrowserModule }  from '@angular/platform-browser';
 import {AppComponent, ChartDirective} from './app.component';
 import {TableauComponent} from "./tableau.component";
 import {RootComponent} from "./root.component";
-import {LoginRoutingModule} from "./login-routing.module";
 import {AppRoutingModule} from "./app.routing.module";
-import {LoginComponent} from "./login.component";
+import {AuthenticationModule} from "./modules/authentication/authentication.module";
+import {ConfigurationService} from "./services/configuration.service";
+
 @NgModule({
     imports: [
         BrowserModule,
         AppRoutingModule,
-        LoginRoutingModule
+        AuthenticationModule
     ],
     declarations: [
         ChartDirective,
         AppComponent,
         TableauComponent,
-        LoginComponent,
         RootComponent
+    ],
+    providers: [
+        ConfigurationService
     ],
     bootstrap: [ RootComponent ]
 })

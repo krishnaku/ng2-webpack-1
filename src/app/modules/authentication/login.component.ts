@@ -1,27 +1,34 @@
-import { Component }   from '@angular/core';
+import { Component, AfterViewInit }   from '@angular/core';
 import {Router, NavigationExtras}      from '@angular/router';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../../services/auth.service';
+import {ConfigurationService} from "../../services/configuration.service";
+
 @Component({
     template: `
-      <form id='login-form' action="http://192.168.99.100:8000/?sso" method="post">
+      <form id='login-form' action="{{ authServiceUrl }}/?sso" method="post">
           <input type="hidden" name="resource" value="{{targetResource}}"/>
-          <button type="submit">Login</button>
       </form>
     `
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
     message: string;
     targetResource: string;
+    authServiceUrl: string;
 
-    constructor(public authService: AuthService, public router: Router) {
+    constructor(public configService: ConfigurationService, public authService: AuthService, public router: Router) {
         this.setMessage();
-        this.targetResource = authService.redirectUrl || router.url;
+        this.targetResource = authService.redirectUrl;
+        this.authServiceUrl = configService.authentication_service_url;
     }
     setMessage() {
         this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
     }
 
 
+    ngAfterViewInit(): void {
+        let loginForm : HTMLFormElement = document.getElementById('login-form') as HTMLFormElement;
+        loginForm.submit();
+    }
 
     login() {
         this.message = 'Trying to log in ...';

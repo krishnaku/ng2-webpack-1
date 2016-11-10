@@ -41,7 +41,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         this.router.navigate([url.toString()]);
         return true;
       } else {
-        this.authService.redirectUrl = url;
+        this.authService.redirectUrl = window.location.href;
 
         let sessionId = 1234567;
 

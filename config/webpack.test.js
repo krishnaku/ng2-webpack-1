@@ -1,4 +1,5 @@
 var helpers = require('./helpers');
+const ENV = process.env.NODE_ENV = process.env.ENV = 'test';
 
 module.exports = {
     devtool: 'inline-source-map',
@@ -32,6 +33,13 @@ module.exports = {
                 include: helpers.root('src', 'app'),
                 loader: 'raw'
             }
+        ],
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'ENV': JSON.stringify(ENV)
+                }
+            })
         ]
     }
 }
